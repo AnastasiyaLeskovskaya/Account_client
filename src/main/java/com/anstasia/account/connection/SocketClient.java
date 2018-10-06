@@ -4,7 +4,6 @@ import com.anstasia.account.controller.Controller;
 import com.anstasia.account.model.Account;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -40,10 +39,8 @@ public class SocketClient implements Serializable {
     public void generateDataObjectA() {
         try {
             out.writeObject("generateDataObjectA"); // отсылаем введенную строку текста серверу.
-            // System.out.println("отослали строку на сервер ");
             out.flush(); // заставляем поток закончить передачу данных.
             Object obj = in.readObject();
-            // System.out.println("Gson ===" + obj);
 
             // распарсить стринг Gson  в ArrayList<Account>
             TypeToken<List<Account>> token = new TypeToken<List<Account>>(){};
@@ -51,6 +48,7 @@ public class SocketClient implements Serializable {
             Controller.getInstance().setObjectA((ArrayList<Account>)accounts);
 
         } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error connecting with generateDataObjectA() in SocketClient.class ");
         }
     }
 
@@ -70,7 +68,9 @@ public class SocketClient implements Serializable {
             // отображение обновленных данных на экране
             Controller.getInstance().accountGUI.accountTable.updateUI();
 
-        }catch (IOException e){}
+        }catch (IOException e){
+            System.out.println("Error connecting with addNewAccount() in SocketClient.class ");
+        }
     }
 
     public void deleteAccountFromDB(int idAccount) throws IOException {

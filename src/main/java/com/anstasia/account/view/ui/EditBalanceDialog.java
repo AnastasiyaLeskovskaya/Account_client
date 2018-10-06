@@ -1,12 +1,9 @@
 package com.anstasia.account.view.ui;
 
-import com.anstasia.account.controller.Controller;
 import com.anstasia.account.model.Account;
-import com.anstasia.account.model.ObjectA;
-
 import javax.swing.*;
 import java.awt.event.*;
-// создается в попап меню
+// Creating in PopupMenu
 
 public class EditBalanceDialog extends JDialog {
     private JPanel contentPane;
@@ -49,15 +46,14 @@ public class EditBalanceDialog extends JDialog {
     private void onOK() {
         // add your code here
         System.out.println(Integer.parseInt(getBalanceTextField.getText()));
+
+        // add Balance local
         account.addBalance(Integer.parseInt(getBalanceTextField.getText()));
-        System.out.println(account.getBalance());
+        //System.out.println(account.getBalance());
 
-        Controller.getInstance().objectT.addNewTransaction(account.getId(),Integer.parseInt(getBalanceTextField.getText()));
+        //add balance to DB
+       // Controller.getInstance().objectT.addNewTransaction(account.getId(),Integer.parseInt(getBalanceTextField.getText()));
         //System.out.println( Controller.getInstance().objectT.getTransaction(account.getId()));
-
-
-        // Controller.getInstance().objectA.getAccount()
-        //System.out.println(Controller.getInstance().objectA.getAccounts());
 
         dispose();
     }

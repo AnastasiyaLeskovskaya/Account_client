@@ -1,15 +1,12 @@
 package com.anstasia.account.controller;
 
-
 import com.anstasia.account.connection.SocketClient;
 import com.anstasia.account.model.Account;
 import com.anstasia.account.model.ObjectA;
 import com.anstasia.account.model.ObjectT;
 import com.anstasia.account.view.ui.AccountGUI;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Controller implements Serializable {
 
@@ -34,9 +31,9 @@ public class Controller implements Serializable {
         return Controller.ControllerHolder.instance;
     }
 
-// Забрали списов в сокете и инициализировали данные
+    // Забрали списов в сокете и инициализировали данные
     public void setObjectA(ArrayList<Account> accountsFromDb) {
-       this.objectA = new ObjectA(accountsFromDb);
+        this.objectA = new ObjectA(accountsFromDb);
     }
 
     public SocketClient getSc() {
@@ -69,6 +66,10 @@ public class Controller implements Serializable {
         return  objectA.getAccount(selectedRow).getId();
     }
 
+    public String getCurrentAccountName(int selectedRow) {//  вызывается в пCreatePopupMenu  получение выделенного в попапиеню Имени счета
+        return  objectA.getAccount(selectedRow).getName();
+    }
+
     public Account getCurrentAccount(int selectedRow) {//  вызывается в пCreatePopupMenu  получение выделенного в попапиеню Имени счета
         return  objectA.getAccount(selectedRow);
     }
@@ -78,24 +79,4 @@ public class Controller implements Serializable {
 
     public void getAllIncome() {// метод который посчитает все поступления у одного счета
     }
-
-//   public void addBalance() {
-//        objectA.getAccount()
-//   }
-
-//    public String getCurrentAccountName(int selectedRow){//  вызывается в пCreatePopupMenu  получение выделенного в попапиеню Имени счета
-//        return  objectA.getAccountName(selectedRow);
-//    }
-
-//    public void addNewAccount(String startBalans, String name){//вызывается при нажатии кнопки OK в addAccountDialog
-//        try {
-//            objectA.getAccounts().add(new Account(Integer.parseInt(startBalans), name));
-//            accountGUI.accountTable.updateUI();
-//            System.out.println(objectA.getAccounts());
-//
-//
-//        }catch (NumberFormatException e) {
-//            System.out.println(" У вас ошибка!!!!Проверьте корректность данных в поле /Начальный баланс/");
-//        }
-//    }
 }

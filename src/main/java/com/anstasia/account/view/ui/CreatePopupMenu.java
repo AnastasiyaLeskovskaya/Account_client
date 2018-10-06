@@ -48,10 +48,12 @@ public class CreatePopupMenu {
             }
             accountTable.updateUI();
         });
+
         menuItemGetAccountName.addActionListener(e -> {
-            System.out.println(getCurrentAccount());
+            System.out.println(getCurrentAccountName());
             accountTable.updateUI();
         });
+
         accountTable.setComponentPopupMenu(popupMenu);
         accountTable.addMouseListener(new TableMouseListener(accountTable));
     }   // закрывающая конструктор
@@ -82,6 +84,11 @@ public class CreatePopupMenu {
         for (int i = 0; i < rowCount; i++) {
             Controller.getInstance().removeRow(0);
         }
+    }
+
+    private String getCurrentAccountName() {//получаем имя выделенного счет
+        int selectedRow = accountTable.getSelectedRow();
+        return Controller.getInstance().getCurrentAccountName(selectedRow);
     }
 
     private Account getCurrentAccount() {//получаем имя выделенного счет

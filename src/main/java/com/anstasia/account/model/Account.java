@@ -54,7 +54,9 @@ public class Account implements Serializable {
 //    public void setCategoryOfBalance(String categoryOfBalance) { this.categoryOfBalance = categoryOfBalance; }
 
     public  void addBalance(int income) {
-        balance += income;
+        int tempBalance = Integer.parseInt(balance) + income;
+        balance = String.valueOf(tempBalance);
+        System.out.println(balance);
         Controller.getInstance().accountGUI.accountTable.updateUI();
     }
 
