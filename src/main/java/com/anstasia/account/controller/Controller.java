@@ -61,14 +61,17 @@ public class Controller implements Serializable {
     }
 
     // методы вызываемые в CreatePopupMenu
-    public void removeRow(int selectedRow) throws SQLException, ClassNotFoundException {// вызывается в пCreatePopupMenu
+    public void removeRow(int selectedRow)  {// вызывается в пCreatePopupMenu
         objectA.deleteAccount (selectedRow);
+    }
+
+    public int getCurrentAccountId(int selectedRow) {//  вызывается в пCreatePopupMenu  получение выделенного в попапиеню Имени счета
+        return  objectA.getAccount(selectedRow).getId();
     }
 
     public Account getCurrentAccount(int selectedRow) {//  вызывается в пCreatePopupMenu  получение выделенного в попапиеню Имени счета
         return  objectA.getAccount(selectedRow);
     }
-
     public void addBalance() {// добавляет поступления на счет
 
     }

@@ -1,7 +1,6 @@
 package com.anstasia.account.main;
 
 
-import com.anstasia.account.connection.DbConnection;
 import com.anstasia.account.connection.SocketClient;
 import com.anstasia.account.controller.Controller;
 import com.anstasia.account.view.ui.AccountGUI;

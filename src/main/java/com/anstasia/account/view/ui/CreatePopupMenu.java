@@ -1,9 +1,9 @@
 package com.anstasia.account.view.ui;
 
-import com.anstasia.account.connection.DbConnection;
 import com.anstasia.account.controller.Controller;
 import com.anstasia.account.model.Account;
 import javax.swing.*;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class CreatePopupMenu {
@@ -26,9 +26,10 @@ public class CreatePopupMenu {
         popupMenu.add(menuItemGetAccountName);
 
         menuItemRemove.addActionListener(e -> {
+
             try {
                 removeCurrentRow();
-            } catch (SQLException | ClassNotFoundException e1) {
+            } catch (IOException e1) {
                 e1.printStackTrace();
             }
             accountTable.updateUI();
@@ -61,11 +62,19 @@ public class CreatePopupMenu {
         editBalanceDialog.setVisible(true);
     }
 
-    private void removeCurrentRow() throws SQLException, ClassNotFoundException {
+    private void removeCurrentRow() throws IOException {
         int selectedRow = accountTable.getSelectedRow();
-        // Controller.getInstance().removeRow(selectedRow);
-        DbConnection.getInstance().deleteAccount( selectedRow);
-        // accountTableModel.removeRow(selectedRow);
+
+        // delete account from Db
+        int idAccountForDel = Controller.getInstance().getCurrentAccountId(selectedRow);
+        Controller.getInstance().sc.deleteAccountFromDB(idAccountForDel);
+
+        // delete account local
+        Controller.getInstance().removeRow(selectedRow);
+
+        // System.out.println("Selected row " + selectedRow);
+        // System.out.println(selectedRow);
+        // System.out.println( "id for del " + Controller.getInstance().getCurrentAccountId(selectedRow));
     }
 
     private void removeAllRows() throws SQLException, ClassNotFoundException {

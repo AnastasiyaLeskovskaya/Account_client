@@ -40,10 +40,10 @@ public class SocketClient implements Serializable {
     public void generateDataObjectA() {
         try {
             out.writeObject("generateDataObjectA"); // отсылаем введенную строку текста серверу.
-           // System.out.println("отослали строку на сервер ");
+            // System.out.println("отослали строку на сервер ");
             out.flush(); // заставляем поток закончить передачу данных.
             Object obj = in.readObject();
-           // System.out.println("Gson ===" + obj);
+            // System.out.println("Gson ===" + obj);
 
             // распарсить стринг Gson  в ArrayList<Account>
             TypeToken<List<Account>> token = new TypeToken<List<Account>>(){};
@@ -59,16 +59,24 @@ public class SocketClient implements Serializable {
         try {
             System.out.println(startBalance + name);
             out.writeObject("addNewAccount");
-
             Account account = new Account(startBalance,name);
             System.out.println(gs.toJson(account));
             out.writeObject(gs.toJson(account)); // отсылаем введенную строку текста серверу.
             out.flush();
-            System.out.println(account);
+            //System.out.println(account);
 
+            // выкачивание свежей таблицы из бд
             generateDataObjectA();
+            // отображение обновленных данных на экране
+            Controller.getInstance().accountGUI.accountTable.updateUI();
 
         }catch (IOException e){}
+    }
+
+    public void deleteAccountFromDB(int idAccount) throws IOException {
+        out.writeObject("deleteAccount");
+        out.writeObject(gs.toJson(idAccount)); // отсылаем введенную строку текста серверу.
+        out.flush();
     }
 }
 
