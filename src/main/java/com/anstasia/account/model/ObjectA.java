@@ -12,16 +12,18 @@ public class ObjectA implements Serializable{
 
     public ObjectA(ArrayList<Account> accounts){
         this.accounts = accounts;
-        //System.out.println("I am ObjA"+ accounts);
+        System.out.println("I am ObjA"+ accounts);
     }
 
     public ArrayList<Account> getAccounts() {
         return accounts;
     }
 
-    public void addNewAccount(String startBalance, String name) {//вызывается при нажатии кнопки OK в addAccountDialog
+    public void addNewAccount( String startBalance, String name) {//вызывается при нажатии кнопки OK в addAccountDialog
         //   для пополнения в массив
-        accounts.add( new Account(startBalance, name));
+
+        int id =  (accounts.get(accounts.size()-1).getId()) + 1;
+        accounts.add( new Account(id, startBalance, name));
         Controller.getInstance().accountGUI.accountTable.updateUI();
     }
 

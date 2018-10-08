@@ -59,8 +59,9 @@ public class AddAccountDialog extends JDialog {
         // Controller.getInstance().objectA.addNewAccount(startBalansTextField.getText(), nameCountTextField.getText());
 
         // Временный коммент из за датапровидера
-       Controller.getInstance().sc.addNewAccount(startBalansTextField.getText(), nameCountTextField.getText());
-       dispose();
+        Controller.getInstance().getObjectA().addNewAccount(startBalansTextField.getText(), nameCountTextField.getText());
+        Controller.getInstance().sc.addNewAccount(startBalansTextField.getText(), nameCountTextField.getText());
+        dispose();
     }
 
     private void onCancel() {

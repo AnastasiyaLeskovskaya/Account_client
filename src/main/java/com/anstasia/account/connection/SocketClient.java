@@ -64,9 +64,9 @@ public class SocketClient implements Serializable {
             //System.out.println(account);
 
             // выкачивание свежей таблицы из бд
-            generateDataObjectA();
+           // generateDataObjectA();
             // отображение обновленных данных на экране
-            Controller.getInstance().accountGUI.accountTable.updateUI();
+            //Controller.getInstance().accountGUI.accountTable.updateUI();
 
         }catch (IOException e){
             System.out.println("Error connecting with addNewAccount() in SocketClient.class ");
@@ -78,5 +78,10 @@ public class SocketClient implements Serializable {
         out.writeObject(gs.toJson(idAccount)); // отсылаем введенную строку текста серверу.
         out.flush();
     }
+    public void  deleteAllAccountsFromDB() throws IOException {
+        out.writeObject("deleteAllAccounts");
+        out.flush();
+    }
+
 }
 

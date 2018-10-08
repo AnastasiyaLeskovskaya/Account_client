@@ -43,7 +43,7 @@ public class CreatePopupMenu {
         menuItemRemoveAll.addActionListener(e -> {
             try {
                 removeAllRows();
-            } catch (SQLException | ClassNotFoundException e1) {
+            } catch (IOException e1) {
                 e1.printStackTrace();
             }
             accountTable.updateUI();
@@ -79,11 +79,12 @@ public class CreatePopupMenu {
         // System.out.println( "id for del " + Controller.getInstance().getCurrentAccountId(selectedRow));
     }
 
-    private void removeAllRows() throws SQLException, ClassNotFoundException {
+    private void removeAllRows() throws IOException {
         int rowCount = accountTable.getRowCount();
         for (int i = 0; i < rowCount; i++) {
             Controller.getInstance().removeRow(0);
         }
+        Controller.getInstance().sc.deleteAllAccountsFromDB();
     }
 
     private String getCurrentAccountName() {//получаем имя выделенного счет
